@@ -2,19 +2,12 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const isLocal = true;
+const MongoDB = require('./config/mongodb');
+const Mongoose = require('./config/mongoose');
+MongoDB();
+Mongoose();
 
-app.get('/', (req, res) => {
-    res.json({
-		message: "✨ 👋🌏 ✨",
-		stage: process.env.NODE_ENV,
-	});
-});
-
-app.get("/ping", (req, res) => {
-	res.json({
-		message: "🏓",
-	});
-});
+require('./routes/loan/Loan.routes')(app);
 
 if (isLocal) {
 	//local host
